@@ -1,0 +1,60 @@
+create database DBProject;
+use DBProject;
+CREATE TABLE Customer (
+  customer_id INT PRIMARY KEY AUTO_INCREMENT,
+  phone VARCHAR(20),
+  balance DECIMAL(10, 2),
+  fname VARCHAR(50),
+  lname VARCHAR(50),
+  country VARCHAR(50),
+  email VARCHAR(100),
+FOREIGN KEY (email) REFERENCES account(email)
+);
+
+
+
+CREATE TABLE Reservation (
+  reservation_id INT PRIMARY KEY AUTO_INCREMENT,
+  customer_id INT,
+  car_id INT ,
+  payment_amount DECIMAL(10, 2),
+  pickup_date date,
+  payment_date timestamp DEFAULT CURRENT_TIMESTAMP,
+  return_date date,
+  office_id INT,
+  image VARCHAR(100),
+  FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+  FOREIGN KEY (car_id) REFERENCES Car(car_id),
+  FOREIGN KEY (office_id) REFERENCES Office(office_id)
+);
+
+
+CREATE TABLE Office (
+  office_id INT PRIMARY KEY AUTO_INCREMENT,
+  email_admin VARCHAR(100),
+  country varchar(255),
+  FOREIGN KEY (email_admin) REFERENCES account(email)
+  
+);
+
+CREATE TABLE Car (
+  car_id INT PRIMARY KEY AUTO_INCREMENT;,
+  `year` INT,
+  model VARCHAR(100),
+  `status` VARCHAR(50),
+  price DECIMAL(10, 2),
+  color VARCHAR(100),
+  plate_id INT,
+  image VARCHAR(100),
+);
+
+
+
+CREATE TABLE Account (
+  email VARCHAR(100) PRIMARY KEY,
+  pass VARCHAR(100)
+);
+
+
+
+
